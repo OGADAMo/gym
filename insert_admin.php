@@ -8,5 +8,5 @@ $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
 echo $hashed_password;
 
-$sql = "INSERT INTO admins (username, password"
+$sql = "INSERT INTO admins (username, password) VALUES (?, ?)";
 ?>
