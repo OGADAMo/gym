@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once 'config.php';
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -17,23 +17,25 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if ($results->num_rows == 1) {
         $admin = $results->fetch_assoc();
 
-        if($admin['password'] === $password){
-            echo "pass je tacan";
+        if(password_verify($password, $admin['password'])){
+            $_SESSION['admin_id'] = $admin['admin_id'];
+            header('location: admin_dashboard.php');
+            
+
         } else {
-            echo "paSS nijje tacan";
+            $_SESSION['error'] = "Netocan Password!";
+            header('location: index.php');
+            exit();
         }
     }
     else {
-        $admin = $results->fetch_assoc();
-        echo $admin;
-        echo "admin ne postoji";
+        $_SESSION['error'] = "Netacan Username!";
+        header('location: index.php');
+        exit();
     }
     
 }
 
-else {
-    echo "NIJE POSLANO";
-}
 
 ?>
 
@@ -45,6 +47,13 @@ else {
     <title>Admin</title>
 </head>
 <body>
+
+    <?php
+    if(isset($_SESSION['error'])) {
+        echo $_SESSION['error'];
+        unset($_SESSION['error']);
+    }
+    ?>
     <form action="" method="POST">
         Username: <input type="text" name="username"><br>
         Password: <input type="password" name="password"><br>
