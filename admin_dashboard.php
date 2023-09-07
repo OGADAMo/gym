@@ -73,7 +73,7 @@ if (!isset($_SESSION['admin_id'])) {
                     const jsonResponse =JSON.parse(response):
 
                     if(jsonResponse.success){
-                        document.querySelector("#photoPathInput").value =jsonResponse.photo_pathM
+                        document.querySelector("#photoPathInput").value =jsonResponse.photo_path
                     } else {
                         console.error(jsonResponse.error);
                     }
