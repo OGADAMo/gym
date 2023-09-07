@@ -21,7 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $_SESSION['admin_id'] = $admin['admin_id'];
             header('location: admin_dashboard.php');
             
-
         } else {
             $_SESSION['error'] = "Netocan Password!";
             header('location: index.php');
@@ -36,7 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     
 }
 
-
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin</title>
+    <title>Login</title>
 </head>
 <body>
 
