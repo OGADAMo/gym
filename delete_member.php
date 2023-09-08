@@ -1,7 +1,7 @@
 <?php
 
 require_once 'config.php';
-;
+
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $member_id = $_POST['member_id'];
