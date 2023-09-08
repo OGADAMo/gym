@@ -25,7 +25,7 @@ if (!isset($_SESSION['admin_id'])) {
 
     <div class="container">
         <div class="row">
-            <div class="row md-12">
+            <div class="col-md-12">
                 <h2>Member List</h2>
                 <table class="table table-striped">
                     <thead>
@@ -95,6 +95,38 @@ if (!isset($_SESSION['admin_id'])) {
                         <?php endforeach; ?>
 
                             
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-md-12">
+                <h2>Trainer List</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Phone Number</th>
+                            <th>Created At</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                            $sql = "SELECT * FROM trainers";
+                            $run = $conn->query($sql);
+
+                            $results = $run->fetch_all(MYSQLI_ASSOC);
+                            
+                            foreach ($results as $result) : ?>
+                                <tr>
+                                    <td><?php echo $result['first_name'] ?></td>
+                                    <td><?php echo $result['last_name'] ?></td>
+                                    <td><?php echo $result['email'] ?></td>
+                                    <td><?php echo $result['phone_number'] ?></td>
+                                    <td><?php echo $result['created_at'] ?></td>
+                                </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
