@@ -46,7 +46,15 @@ if (!isset($_SESSION['admin_id'])) {
                     <tbody>
                         <?php
 
-                        $sql ="SELECT members.*, traning_plans.name AS training_plan_name FROM `members` LEFT JOIN `traning_plans` ON members.training_plan_id = traning_plans.plan_id;";
+                        $sql ="SELECT
+                                    members.*,
+                                    traning_plans.name AS training_plan_name,
+                                    trainers.first_name AS trainer_first_name,
+                                    trainers.last_name AS trainer_last_name
+                                FROM
+                                    `members`
+                                LEFT JOIN traning_plans ON members.training_plan_id = traning_plans.plan_id
+                                LEFT JOIN trainers ON members.trainer_id = trainers.trainer_id;";
                         $results = $conn->query($sql);
                         $results = $results->fetch_all(MYSQLI_ASSOC);
                         foreach($results as $result) : ?>
@@ -55,7 +63,13 @@ if (!isset($_SESSION['admin_id'])) {
                                 <td><?php echo $result['last_name'] ?></td>
                                 <td><?php echo $result['email'] ?></td>
                                 <td><?php echo $result['phone_number'] ?></td>
-                                <td><?php echo $result['trainer_id'] ?></td>
+                                <td><?php 
+                                if($result['trainer_first_name']){
+                                    echo $result['trainer_first_name'] . " " . $result['trainer_last_name'];
+                                } else {
+                                    echo "Nema trenera";
+                                }
+                                 ?></td>
                                 <td><img src="<?php echo $result['photo_path'] ?>" alt="photo" width="60px" height="60px"></td>
                                 <td>
                                     <?php 
@@ -70,7 +84,13 @@ if (!isset($_SESSION['admin_id'])) {
                                 </td>
                                 <td><a target="_blank" href="<?php echo $result['access_card_pdf'] ?>" >Access Card</a></td>
                                 <td><?php echo $result['created_at'] ?></td>
-                                <td><button>DELETE</button></td>
+                              
+                                <td>
+                                    <form action="delete_member.php" method="POST">
+                                        <input type="hidden" name="member_id" value="<?php echo $result['member_id'] ?>">
+                                        <button>DELETE</button>
+                                    </form>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
 
