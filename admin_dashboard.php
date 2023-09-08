@@ -27,6 +27,9 @@ if (!isset($_SESSION['admin_id'])) {
         <div class="row">
             <div class="col-md-12">
                 <h2>Member List</h2>
+
+                <a href="export.php?what=members" class="btn btn-success btn-sm">Export</a>
+
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -104,6 +107,9 @@ if (!isset($_SESSION['admin_id'])) {
 
             <div class="col-md-12">
                 <h2>Trainer List</h2>
+
+                <a href="export.php?what=trainers" class="btn btn-success btn-sm">Export</a>
+
                 <table class="table table-striped">
                     <thead>
                         <tr>
