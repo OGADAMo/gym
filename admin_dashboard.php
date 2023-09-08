@@ -24,6 +24,63 @@ if (!isset($_SESSION['admin_id'])) {
     <?php endif; ?>
 
     <div class="container">
+        <div class="row">
+            <div class="row md-12">
+                <h2>Member List</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Phone Number</th>
+                            <th>Trainer</th>
+                            <th>Photo</th>
+                            <th>Training Plan</th>
+                            <th>Access Card</th>
+                            <th>Created At</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <?php
+
+                        $sql ="SELECT members.*, traning_plans.name AS training_plan_name FROM `members` LEFT JOIN `traning_plans` ON members.training_plan_id = traning_plans.plan_id;";
+                        $results = $conn->query($sql);
+                        $results = $results->fetch_all(MYSQLI_ASSOC);
+                        foreach($results as $result) : ?>
+                            <tr>
+                                <td><?php echo $result['first_name'] ?></td>
+                                <td><?php echo $result['last_name'] ?></td>
+                                <td><?php echo $result['email'] ?></td>
+                                <td><?php echo $result['phone_number'] ?></td>
+                                <td><?php echo $result['trainer_id'] ?></td>
+                                <td><img src="<?php echo $result['photo_path'] ?>" alt="photo" width="60px" height="60px"></td>
+                                <td>
+                                    <?php 
+                                        if ($result['training_plan_name']) {
+                                            echo $result['training_plan_name'];
+                                        } else {
+                                            echo "Nema plana";
+
+                                        }
+                                        
+                                    ?>
+                                </td>
+                                <td><a target="_blank" href="<?php echo $result['access_card_pdf'] ?>" >Access Card</a></td>
+                                <td><?php echo $result['created_at'] ?></td>
+                                <td><button>DELETE</button></td>
+                            </tr>
+                        <?php endforeach; ?>
+
+                            
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+
         <div class="row mb-5">
             <div class="row mb-6">
                 <h2>Register Member</h2>
@@ -36,18 +93,13 @@ if (!isset($_SESSION['admin_id'])) {
                         <select class="form-control" name="training_plan_id">
                             <option value="" disabled selected>Training Plan</option>
                             <?php
-
                             $sql = "SELECT * FROM `traning_plans`"; // Fix the table name
                             $run = $conn->query($sql);
                             $results = $run->fetch_all(MYSQLI_ASSOC);
-
-                            
+                    
                             foreach($results as $result){
                                 echo "<option value='" . $result['plan_id'] . "'>" . $result['name'] . "</option>";
-                            }
-                              
-
-                            ?>
+                            }    ?>
                         </select><br>
                         <input type="hidden" name="photo_path" id="photoPathInput"></input>
                         <div id="dropzone-upload" class="dropzone mt-4 border-dashed"></div>
@@ -56,33 +108,29 @@ if (!isset($_SESSION['admin_id'])) {
             </div>
         </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
-
     <script>
         Dropzone.options.dropzoneUpload = {
-            url: "upload_photo.php",
-            paramName: "photo",
-            maxFileSize: 20,
-            acceptedFiles: "image/*",
-            init: function() {
-                this.on("success", function(file, response) {
-                    // File upload success
-                    const jsonResponse =JSON.parse(response):
+    url: "upload_photo.php",
+    paramName: "photo",
+    maxFilesize: 20, // Maximum file size in MB
+    acceptedFiles: "image/*", // Accept only image files
+    init: function() {
+        this.on("success", function(file, response) {
+            // File upload success
+            const jsonResponse = JSON.parse(response);
 
-                    if(jsonResponse.success){
-                        document.querySelector("#photoPathInput").value =jsonResponse.photo_path
-                    } else {
-                        console.error(jsonResponse.error);
-                    }
-                });
+            if (jsonResponse.success) {
+                document.querySelector("#photoPathInput").value = jsonResponse.photo_path;
+            } else {
+                console.error(jsonResponse.error);
+            }
+        });
+    }
+};
 
-               
-            };
-
-        }
     </script>
 </body>
 </html>
