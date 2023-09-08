@@ -55,8 +55,11 @@ if (!isset($_SESSION['admin_id'])) {
                                     `members`
                                 LEFT JOIN traning_plans ON members.training_plan_id = traning_plans.plan_id
                                 LEFT JOIN trainers ON members.trainer_id = trainers.trainer_id;";
+
                         $results = $conn->query($sql);
                         $results = $results->fetch_all(MYSQLI_ASSOC);
+                        $select_members = $results;
+
                         foreach($results as $result) : ?>
                             <tr>
                                 <td><?php echo $result['first_name'] ?></td>
@@ -117,7 +120,7 @@ if (!isset($_SESSION['admin_id'])) {
                             $run = $conn->query($sql);
 
                             $results = $run->fetch_all(MYSQLI_ASSOC);
-                            
+                            $select_trainers = $results;
                             foreach ($results as $result) : ?>
                                 <tr>
                                     <td><?php echo $result['first_name'] ?></td>
@@ -168,7 +171,39 @@ if (!isset($_SESSION['admin_id'])) {
                 Phone Number: <input class="form-control" type="text" name="phone_number"><br>
                 <input class="btn btn-primary" value="Register Trainer" type="submit">
             </form>
+            </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Assign Trainer to Member</h2>
+                <form action="assign_trainer.php" method="post">
+                    <label for="">Select Member</label>
+                    <select name="member" class="form-select">
+                        <?php 
+                        foreach($select_members as $member) : ?>
+
+                        <option value="<?php echo $member['member_id']  ?>">
+                            <?php echo $member['first_name'] . " " . $member['last_name']; ?>
+                        </option>
+                        <?php endforeach; ?>
+
+                    </select>
+
+                    <label for="">Select Trainer</label>
+                    <select name="trainer" class="form-select">
+                        <?php 
+                            foreach($select_trainers as $trainer) : ?>
+
+                        <option value="<?php echo $trainer['trainer_id']  ?>">
+                            <?php echo $trainer['first_name'] . " " . $trainer['last_name']; ?>
+                        </option>
+                        <?php endforeach; ?>
+                    </select>
+
+                    <button type="Submit" class="btn btn-primary">Assign Trainer</button>
+                </form>
+            </div>
         </div>
 
         
