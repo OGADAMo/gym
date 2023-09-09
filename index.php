@@ -54,24 +54,24 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-left-links navbar-nav ">
                 <li class="nav-item active">
-                    <a class="nav-link" href="naslovna.html">Naslovna</a>
+                    <a class="nav-link" href="https://www.levelfitstudio.com/">Naslovna</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="o_nama.html">O nama</a>
+                    <a class="nav-link" href="https://www.levelfitstudio.com/o-nama">O nama</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="kontakt.html">Kontakt</a>
+                    <a class="nav-link" href="https://www.levelfitstudio.com/kontakt">Kontakt</a>
                 </li>
             </ul>
             <ul class="navbar-right-links navbar-nav "> <!-- Links on the right side -->
                 <li class="nav-item">
-                    <a class="nav-link" href="galerija.html">Galerija</a>
+                    <a class="nav-link" href="https://www.levelfitstudio.com/galerija">Galerija</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="blog.html">Blog</a>
+                    <a class="nav-link" href="https://www.levelfitstudio.com/blog">Blog</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="programi.html">Programi</a>
+                    <a class="nav-link" href="https://www.levelfitstudio.com/programi">Programi</a>
                 </li>
             </ul>
         </div>

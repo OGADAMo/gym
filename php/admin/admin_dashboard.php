@@ -13,22 +13,58 @@ if (!isset($_SESSION['admin_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
-    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/admin.css">
+    <title>Admin Dashboard</title>
 </head>
 <body>
-    <?php if (isset($_SESSION['success_message'])) : ?>
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <?php echo $_SESSION['success_message']; unset($_SESSION['success_message'])?>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    <?php endif; ?>
+<nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="#"><img src="assets/img/logo.webp" alt="Level Fit Studio Logo" height="100px"></a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-left-links navbar-nav ">
+                <li class="nav-item active">
+                    <a class="nav-link" href="https://www.levelfitstudio.com/">Naslovna</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.levelfitstudio.com/o-nama">O nama</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.levelfitstudio.com/kontakt">Kontakt</a>
+                </li>
+            </ul>
+            <ul class="navbar-right-links navbar-nav "> <!-- Links on the right side -->
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.levelfitstudio.com/galerija">Galerija</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.levelfitstudio.com/blog">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.levelfitstudio.com/programi">Programi</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+
 
     <div class="container">
+        <div class="row">
+            <?php if (isset($_SESSION['success_message'])) : ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <?php echo $_SESSION['success_message']; unset($_SESSION['success_message'])?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php endif; ?>
+        </div>
+
+        <div><h1>Admin Dashboard</h1></div>
+
         <div class="row">
             <div class="col-md-12">
                 <h2>Member List</h2>
 
-                <a href="export.php?what=members" class="btn btn-success btn-sm">Export</a>
+                <a href="export.php?what=members" class="export btn btn-success btn-sm">Export</a>
 
                 <table class="table table-striped">
                     <thead>
@@ -76,7 +112,7 @@ if (!isset($_SESSION['admin_id'])) {
                                     echo "Nema trenera";
                                 }
                                  ?></td>
-                                <td><img src="<?php echo $result['photo_path'] ?>" alt="photo" width="60px" height="60px"></td>
+                                <td><img src="<?= !empty($result['photo_path']) ? $result['photo_path'] : 'assets/img/default.jpg' ?>" alt="photo" width="60px" height="60px"></td>
                                 <td>
                                     <?php 
                                         if ($result['training_plan_name']) {
@@ -108,7 +144,7 @@ if (!isset($_SESSION['admin_id'])) {
             <div class="col-md-12">
                 <h2>Trainer List</h2>
 
-                <a href="export.php?what=trainers" class="btn btn-success btn-sm">Export</a>
+                <a href="export.php?what=trainers" class="export btn btn-success btn-sm">Export</a>
 
                 <table class="table table-striped">
                     <thead>

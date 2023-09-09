@@ -1,4 +1,6 @@
-
+* {
+    box-sizing: border-box;
+}
 
 /* Custom CSS for Navbar */
 .navbar {
@@ -16,21 +18,21 @@
     left: 50%;
     transform: translateX(-50%);
 }
-
+#navbarNav {
+    width: 100%;
+}
 /* Style for left links */
 .navbar-left-links {
-    width: 40%;
+    width: 20%;
     margin-left: auto;
-    padding-left: 100px;
 }
 
 /* Style for right links */
 .navbar-right-links {
-    width: 40%;
+    width: 20%;
     margin-right: auto;
-    padding-left: 100px;
-
-    
+    display: flex;
+    justify-content: flex-end;
 
 }
 
