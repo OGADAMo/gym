@@ -42,20 +42,64 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <title>Login</title>
 </head>
 <body>
 
-    <?php
-    if(isset($_SESSION['error'])) {
-        echo $_SESSION['error'];
-        unset($_SESSION['error']);
-    }
-    ?>
-    <form action="" method="POST">
-        Username: <input type="text" name="username"><br>
-        Password: <input type="password" name="password"><br>
-        <input type="submit" value="Login">
-    </form>
+
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="#"><img src="assets/img/logo.webp" alt="Level Fit Studio Logo" height="100px"></a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-left-links navbar-nav ">
+                <li class="nav-item active">
+                    <a class="nav-link" href="naslovna.html">Naslovna</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="o_nama.html">O nama</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="kontakt.html">Kontakt</a>
+                </li>
+            </ul>
+            <ul class="navbar-right-links navbar-nav "> <!-- Links on the right side -->
+                <li class="nav-item">
+                    <a class="nav-link" href="galerija.html">Galerija</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="blog.html">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="programi.html">Programi</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+
+    <div class="login-container">
+        <h2>Login</h2>
+        <form action="" method="POST">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username"><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password"><br>
+            <div>
+            <?php
+                if(isset($_SESSION['error'])) {
+                    echo $_SESSION['error'];
+                    unset($_SESSION['error']);
+                }
+                ?>
+            </div>
+
+            <input type="submit" value="Login">
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
