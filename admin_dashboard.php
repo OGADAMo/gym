@@ -153,6 +153,7 @@ if (!isset($_SESSION['admin_id'])) {
                             <th>Last Name</th>
                             <th>Email</th>
                             <th>Phone Number</th>
+                            <th>Photo</th>
                             <th>Created At</th>
                         </tr>
                     </thead>
@@ -169,6 +170,7 @@ if (!isset($_SESSION['admin_id'])) {
                                     <td><?php echo $result['last_name'] ?></td>
                                     <td><?php echo $result['email'] ?></td>
                                     <td><?php echo $result['phone_number'] ?></td>
+                                    <td><img src="<?= !empty($result['photo_path']) ? $result['photo_path'] : 'assets/img/default.jpg' ?>" alt="photo" width="60px" height="60px"></td>
                                     <td><?php echo $result['created_at'] ?></td>
                                 </tr>
                         <?php endforeach; ?>
@@ -211,6 +213,8 @@ if (!isset($_SESSION['admin_id'])) {
                 Last name: <input class="form-control" type="text" name="last_name"><br>
                 Email: <input class="form-control" type="text" name="email"><br>
                 Phone Number: <input class="form-control" type="text" name="phone_number"><br>
+                <input type="hidden" name="photo_path" id="photoPathInput"></input>
+                <div id="dropzone-upload" class="dropzone mt-4 border-dashed"></div>
                 <input class="btn btn-primary" value="Register Trainer" type="submit">
             </form>
             </div>

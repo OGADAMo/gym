@@ -8,11 +8,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $last_name = $_POST['last_name'];
     $email = $_POST['email'];
     $phone_number = $_POST['phone_number'];
+    $photo_path = $_POST['photo_path'];
     
-    $sql = "INSERT INTO trainers (first_name, last_name, email, phone_number) VALUES (?, ?, ?, ?)";
+    $sql = "INSERT INTO trainers (first_name, last_name, email, photo_path, phone_number) VALUES (?, ?, ?, ?, ?)";
 
     $run = $conn->prepare($sql);
-    $run->bind_param("ssss", $first_name, $last_name, $email, $phone_number);
+    $run->bind_param("sssss", $first_name, $last_name, $email, $photo_path, $phone_number);
     $run->execute();
 
         
